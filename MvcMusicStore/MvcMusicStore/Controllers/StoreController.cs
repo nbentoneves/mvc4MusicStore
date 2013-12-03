@@ -9,6 +9,7 @@ namespace MvcMusicStore.Controllers
 {
     public class StoreController : Controller
     {
+        private MusicStoreEntities storeDB = new MusicStoreEntities();
         //
         // GET: /Store/
         /*public string Index()
@@ -17,9 +18,10 @@ namespace MvcMusicStore.Controllers
         }*/
         public ActionResult Index()
         {
-            var genres = new List<Genre>{
+           /*var genres = new List<Genre>{
                 new Genre{Name="Disco"}, new Genre{Name="Jazz"},new Genre{Name="Rock"}
-            };
+            };*/
+            var genres = storeDB.Genres.ToList();
 
             return View(genres);
         }
@@ -35,7 +37,10 @@ namespace MvcMusicStore.Controllers
 
         public ActionResult Browse(string genre)
         {
-            var genreModel = new Genre { Name = genre };
+            // Retrieve Genre and its Associated Albums from database
+            var genreModel = storeDB.Genres.Include("Albums")
+                .Single(g => g.Name == genre);
+
             return View(genreModel);
         }
 
