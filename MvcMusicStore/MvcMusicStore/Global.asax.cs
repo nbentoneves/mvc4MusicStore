@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Optimization;
 
 namespace MvcMusicStore
 {
@@ -20,6 +21,8 @@ namespace MvcMusicStore
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            //More Info: http://msdn.microsoft.com/pt-br/library/dn168847.aspx | http://www.asp.net/mvc/tutorials/mvc-4/bundling-and-minification
+            BundleConfig.RegisterBundle(BundleTable.Bundles);
         }
     }
 }
